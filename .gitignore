@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenv
+.venv/
+venv/
+
+# Build artifacts
+build/
+dist/
+.eggs/
+
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/
+
+# Logs / local state
+*.log
+core
+
+# App history (default location is in ~/.local/state, but keep local copies ignored too)
+history.jsonl
+history.jsonl.*
