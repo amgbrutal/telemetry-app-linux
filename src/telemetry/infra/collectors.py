@@ -7,7 +7,7 @@ from dataclasses import dataclass
 
 import psutil
 
-from resmon.core.models import (
+from telemetry.core.models import (
     CpuSample,
     DiskIoSample,
     DiskSample,

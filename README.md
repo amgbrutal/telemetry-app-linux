@@ -1,4 +1,4 @@
-## resmon
+## telemetry
 
 Локальный GUI-монитор ресурсов для Linux “для себя”.
 
@@ -13,9 +13,12 @@
 
 ### Требования
 
+- **Платформа**: Linux (X11/Wayland)
 - **Python**: 3.10+
 - **NVIDIA метрики** (опционально): установлен драйвер NVIDIA и доступна команда `nvidia-smi`
 - **Температуры** (опционально): зависит от датчиков в системе; часто помогает пакет `lm-sensors`
+
+> Это **Python‑проект** (исходники), а не готовый “exe”. Для запуска нужен Python и установка зависимостей.
 
 ### Установка
 
@@ -29,25 +32,25 @@ pip install -e .
 ### Запуск
 
 ```bash
-resmon
+telemetry
 ```
 
 ### Полезные флаги
 
 ```bash
 # Быстрее обновлять UI (метрики собираются в фоне)
-resmon --interval-ms 500
+telemetry --interval-ms 500
 
 # Не писать историю
-resmon --no-history
+telemetry --no-history
 
 # Указать путь к history.jsonl
-resmon --history-path /path/to/history.jsonl
+telemetry --history-path /path/to/history.jsonl
 
 # Мониторить несколько точек монтирования
-resmon --disk-mountpoint / --disk-mountpoint /home
+telemetry --disk-mountpoint / --disk-mountpoint /home
 ```
 
 ### История
 
-По умолчанию пишется в `~/.local/state/resmon/history.jsonl`.
+По умолчанию пишется в `~/.local/state/telemetry/history.jsonl`.

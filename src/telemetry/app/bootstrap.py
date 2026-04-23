@@ -3,12 +3,12 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from resmon.app.service import MonitorService
-from resmon.core.alerts import ThresholdRule
-from resmon.infra.collectors import CollectorConfig, SystemCollector
-from resmon.infra.history import JsonlHistorySink, default_state_dir
-from resmon.infra.processes import ProcessTopCollector
-from resmon.ui.main_window import MainWindow, run_qt
+from telemetry.app.service import MonitorService
+from telemetry.core.alerts import ThresholdRule
+from telemetry.infra.collectors import CollectorConfig, SystemCollector
+from telemetry.infra.history import JsonlHistorySink, default_state_dir
+from telemetry.infra.processes import ProcessTopCollector
+from telemetry.ui.main_window import MainWindow, run_qt
 
 
 def run(argv: list[str]) -> int:
@@ -52,12 +52,14 @@ def run(argv: list[str]) -> int:
             service=service,
             interval_ms=int(args.interval_ms),
             history_path=history.path if history else None,
+            tray_enabled=bool(args.tray),
+            start_in_tray=bool(args.start_in_tray),
         )
     )
 
 
 def _parse_args(argv: list[str]) -> argparse.Namespace:
-    p = argparse.ArgumentParser(prog="resmon")
+    p = argparse.ArgumentParser(prog="telemetry")
     p.add_argument("--interval-ms", type=int, default=1000, help="Период обновления.")
     p.add_argument(
         "--disk-mountpoint",
@@ -70,8 +72,12 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
     p.add_argument("--alert-mem", type=float, default=90.0, help="Порог RAM в %%.")
     p.add_argument("--no-history", action="store_true", help="Не писать историю в файл.")
     p.add_argument("--history-path", type=str, default="", help="Путь к history.jsonl.")
+    p.add_argument("--tray", action="store_true", help="Включить режим трея (сворачивать в трей).")
+    p.add_argument("--start-in-tray", action="store_true", help="Стартовать свёрнутым в трей (требует --tray).")
     ns = p.parse_args(argv)
     if not ns.disk_mountpoints:
         ns.disk_mountpoints = ["/"]
+    if ns.start_in_tray and not ns.tray:
+        ns.tray = True
     return ns
 

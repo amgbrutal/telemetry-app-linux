@@ -5,14 +5,14 @@ import os
 from dataclasses import asdict
 from pathlib import Path
 
-from resmon.core.models import Alert, Sample
+from telemetry.core.models import Alert, Sample
 
 
 def default_state_dir() -> Path:
     # Follow XDG base dir spec (state is best suited for time-series logs).
     xdg_state = os.environ.get("XDG_STATE_HOME")
     base = Path(xdg_state) if xdg_state else Path.home() / ".local" / "state"
-    return base / "resmon"
+    return base / "telemetry"
 
 
 class JsonlHistorySink:

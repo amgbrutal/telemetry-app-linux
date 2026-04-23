@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from resmon.core.alerts import ThresholdRule
-from resmon.core.models import Alert, Sample
-from resmon.infra.collectors import SystemCollector
-from resmon.infra.history import JsonlHistorySink
-from resmon.infra.processes import ProcessRow, ProcessTopCollector
+from telemetry.core.alerts import ThresholdRule
+from telemetry.core.models import Alert, Sample
+from telemetry.infra.collectors import SystemCollector
+from telemetry.infra.history import JsonlHistorySink
+from telemetry.infra.processes import ProcessRow, ProcessTopCollector
 
 
 @dataclass(frozen=True)
